@@ -186,6 +186,7 @@ p { color: var(--text-2); line-height: 1.75; }
   font-size: .82rem !important;
   border-radius: 10px !important;
   box-shadow: none !important;
+  color: #fff !important;
 }
 .nav__toggle {
   display: none;
