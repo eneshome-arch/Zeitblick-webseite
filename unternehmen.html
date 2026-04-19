@@ -6,6 +6,111 @@
   <title>Für Unternehmen — Zeitblick Personalservice</title>
   <meta name="description" content="Qualifiziertes Pflegepersonal für Ihre Einrichtung. Zeitblick Personalservice vermittelt schnell und zuverlässig in Hannover.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Anfrage-Modal ── */
+    .req-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .req-modal-overlay.open { display: flex; }
+    .req-modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 540px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,.18);
+      position: relative;
+    }
+    .req-modal__close {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.1rem; color: var(--text-2);
+      transition: background .2s;
+    }
+    .req-modal__close:hover { background: var(--border); }
+
+    /* Stepper */
+    .req-stepper { display: flex; align-items: center; margin-bottom: 28px; }
+    .req-stepper__step { display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
+    .req-stepper__dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--bg-subtle); color: var(--text-3);
+      font-size: .82rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--border-light);
+      transition: all .3s;
+    }
+    .req-stepper__label { font-size: .72rem; font-weight: 600; color: var(--text-3); letter-spacing: .04em; transition: color .3s; }
+    .req-stepper__line { flex: 1; height: 2px; background: var(--border-light); margin: 0 8px; margin-bottom: 20px; border-radius: 2px; transition: background .4s; }
+    .req-stepper__step.active .req-stepper__dot { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(14,165,233,.15); }
+    .req-stepper__step.active .req-stepper__label { color: var(--primary); }
+    .req-stepper__step.done .req-stepper__dot { background: var(--secondary); color: #fff; border-color: var(--secondary); }
+    .req-stepper__step.done .req-stepper__label { color: var(--secondary); }
+    .req-stepper__line.done { background: var(--secondary); }
+
+    /* Panels */
+    .req-panel { display: none; }
+    .req-panel.active { display: block; animation: reqStepIn .25s ease both; }
+    @keyframes reqStepIn { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:translateX(0); } }
+
+    /* Nav row */
+    .req-nav { display: flex; gap: 10px; margin-top: 20px; }
+    .req-nav .btn--outline { background: transparent; border: 1.5px solid var(--border); color: var(--text-2); }
+    .req-nav .btn--outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* Summary cards */
+    .summary-block {
+      background: var(--bg-subtle);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+    .summary-block__title {
+      font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 10px;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .87rem; padding: 3px 0;
+    }
+    .summary-row span:first-child { color: var(--text-2); }
+    .summary-row span:last-child { font-weight: 600; color: var(--text); }
+
+    /* Contact preference toggle */
+    .contact-toggle { display: flex; gap: 10px; margin-top: 6px; }
+    .contact-toggle label {
+      flex: 1; text-align: center; padding: 10px;
+      border: 2px solid var(--border-light); border-radius: 10px;
+      cursor: pointer; font-size: .87rem; font-weight: 600;
+      color: var(--text-2); transition: all .2s;
+    }
+    .contact-toggle input { display: none; }
+    .contact-toggle input:checked + label {
+      border-color: var(--primary); background: var(--primary-light); color: var(--primary);
+    }
+
+    #rp-1 .form-row .form-field { padding: 11px 13px; font-size: .88rem; }
+    #rp-1 .form-row .form-label { font-size: .82rem; }
+
+    @media (max-width: 480px) {
+      .req-modal { padding: 24px 16px; }
+      #rp-1 .form-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -39,12 +144,28 @@
 
 <!-- Page Hero -->
 <section class="page-hero">
-  <div class="container">
-    <div class="eyebrow animate-up">Für Unternehmen</div>
-    <h1 class="animate-up delay-1">Ihr Personalengpass —<br>unser Einsatz.</h1>
-    <p class="lead animate-up delay-2">Zeitblick Personalservice unterstützt Pflegeeinrichtungen, Krankenhäuser und ambulante Dienste mit qualifiziertem Fachpersonal. Flexibel, schnell und zuverlässig.</p>
-    <div class="hero__actions animate-up delay-3">
-      <a href="kontakt.html" class="btn btn--primary btn--lg">Jetzt Personal anfragen</a>
+  <div class="container page-hero__split">
+    <div class="page-hero__text">
+      <div class="eyebrow animate-up">Für Unternehmen</div>
+      <h1 class="animate-up delay-1">Ihr Personalengpass —<br>unser Einsatz.</h1>
+      <p class="lead animate-up delay-2">Zeitblick Personalservice unterstützt Pflegeeinrichtungen, Krankenhäuser und ambulante Dienste mit qualifiziertem Fachpersonal. Flexibel, schnell und zuverlässig.</p>
+      <div class="hero__actions animate-up delay-3">
+        <button onclick="openReqModal()" class="btn btn--primary btn--lg">Jetzt Personal anfragen</button>
+      </div>
+    </div>
+    <div class="page-hero__visual animate-up delay-2">
+      <div class="ho-deco-ring ho-deco-ring--1"></div>
+      <div class="ho-deco-ring ho-deco-ring--2"></div>
+      <div class="ho-deco-ring ho-deco-ring--3"></div>
+      <div class="ho-center" style="background:linear-gradient(135deg,#0ea5e9,#f59e0b);">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M8 7V5a2 2 0 00-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div class="ho-orbit ho-orbit--in"><div class="ho-bubble ho-green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+      <div class="ho-orbit ho-orbit--in" style="animation-delay:-3.67s"><div class="ho-bubble ho-sky" style="animation-delay:-3.67s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+      <div class="ho-orbit ho-orbit--in" style="animation-delay:-7.33s"><div class="ho-bubble ho-amber" style="animation-delay:-7.33s"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div></div>
+      <div class="ho-orbit ho-orbit--out"><div class="ho-bubble ho-violet"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+      <div class="ho-orbit ho-orbit--out" style="animation-delay:-5.67s"><div class="ho-bubble ho-pink" style="animation-delay:-5.67s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div></div>
+      <div class="ho-orbit ho-orbit--out" style="animation-delay:-11.33s"><div class="ho-bubble ho-rose" style="animation-delay:-11.33s"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
     </div>
   </div>
 </section>
@@ -108,6 +229,11 @@
   <div class="container">
     <div class="grid-2" style="align-items:center;gap:80px;">
       <div>
+        <div class="img-card" style="margin-bottom:36px;">
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=85"
+               alt="Pflegefachkraft und ältere Patientin in vertrauensvollem Gespräch"
+               loading="lazy">
+        </div>
         <div class="eyebrow">Ihre Vorteile</div>
         <h2>Was Sie von Zeitblick erwarten dürfen.</h2>
         <div class="divider"></div>
@@ -155,7 +281,7 @@
         <h3 style="font-size:1.8rem;line-height:1.25;margin-bottom:16px;">48h<br><span style="color:var(--text-2);font-weight:400;font-size:1.1rem;">Durchschnittliche Besetzungszeit</span></h3>
         <div style="width:100%;height:1px;background:var(--border-light);margin:24px 0;"></div>
         <p style="font-size:.95rem;">Wenn Sie uns heute anfragen, haben wir in den meisten Fällen innerhalb von 48 Stunden eine passende Pflegekraft für Sie. Natürlich abhängig von Qualifikation und Verfügbarkeit – aber wir geben immer unser Bestes.</p>
-        <a href="kontakt.html" class="btn btn--primary mt-24">Jetzt anfragen</a>
+        <button onclick="openReqModal()" class="btn btn--primary mt-24">Jetzt anfragen</button>
       </div>
     </div>
   </div>
@@ -206,7 +332,7 @@
   <div class="container">
     <h2>Personalengpass? Wir helfen.</h2>
     <p class="lead">Rufen Sie uns an oder schreiben Sie uns – wir reagieren schnell und finden eine Lösung.</p>
-    <a href="kontakt.html" class="btn btn--white btn--lg">Jetzt Personal anfragen</a>
+    <button onclick="openReqModal()" class="btn btn--white btn--lg">Jetzt Personal anfragen</button>
     <a href="tel:+491638644309" class="btn btn--ghost btn--lg">Direkt anrufen</a>
   </div>
 </section>
@@ -257,6 +383,282 @@
   </div>
 </footer>
 
+<!-- Anfrage-Modal -->
+<div class="req-modal-overlay" id="reqModal" onclick="closeReqOnOverlay(event)">
+  <div class="req-modal">
+    <button class="req-modal__close" onclick="closeReqModal()">✕</button>
+    <div class="eyebrow mb-8">Personalanfrage</div>
+    <h3 style="margin-bottom:20px;font-size:1.3rem;">Personal anfragen</h3>
+
+    <!-- Stepper -->
+    <div class="req-stepper">
+      <div class="req-stepper__step active" id="ri-1">
+        <div class="req-stepper__dot">1</div>
+        <div class="req-stepper__label">Kontakt</div>
+      </div>
+      <div class="req-stepper__line" id="rl-1"></div>
+      <div class="req-stepper__step" id="ri-2">
+        <div class="req-stepper__dot">2</div>
+        <div class="req-stepper__label">Bedarf</div>
+      </div>
+      <div class="req-stepper__line" id="rl-2"></div>
+      <div class="req-stepper__step" id="ri-3">
+        <div class="req-stepper__dot">3</div>
+        <div class="req-stepper__label">Übersicht</div>
+      </div>
+    </div>
+
+    <form id="reqForm" novalidate>
+
+      <!-- Step 1: Kontaktdaten -->
+      <div class="req-panel active" id="rp-1">
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group">
+            <label class="form-label" style="font-size:.82rem;">Vorname *</label>
+            <input type="text" id="r-vorname" class="form-field" placeholder="Max" style="padding:5px 14px !important;height:44px !important;">
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-size:.82rem;">Nachname *</label>
+            <input type="text" id="r-nachname" class="form-field" placeholder="Mustermann" style="padding:5px 14px !important;height:44px !important;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name der Einrichtung *</label>
+          <input type="text" id="r-einrichtung" class="form-field" placeholder="Pflegeheim Sonnenschein GmbH">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-Mail-Adresse *</label>
+          <input type="email" id="r-email" class="form-field" placeholder="kontakt@einrichtung.de">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefonnummer</label>
+          <input type="tel" id="r-tel" class="form-field" placeholder="+49 ...">
+        </div>
+        <div class="req-nav">
+          <button type="button" class="btn btn--primary" style="flex:1;justify-content:center;" onclick="rNextStep(1)">
+            Weiter
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:6px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Personalbedarf -->
+      <div class="req-panel" id="rp-2">
+        <div class="form-group">
+          <label class="form-label">Art der Stelle *</label>
+          <select id="r-stelle" class="form-field">
+            <option value="">Bitte wählen…</option>
+            <option>Altenpfleger/in</option>
+            <option>Pflegefachkraft</option>
+            <option>Pflegehelfer/in</option>
+            <option>Wohnbereichsleitung</option>
+            <option>Betreuungsassistenz §43b</option>
+            <option>Gerontopsychiatrische Fachkraft</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Anzahl benötigter Mitarbeiter *</label>
+          <select id="r-anzahl" class="form-field">
+            <option value="">Bitte wählen…</option>
+            <option>1 Person</option>
+            <option>2–3 Personen</option>
+            <option>4–5 Personen</option>
+            <option>6–10 Personen</option>
+            <option>Mehr als 10 Personen</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Einsatz ab *</label>
+          <input type="date" id="r-datum" class="form-field">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Einsatzdauer *</label>
+          <select id="r-dauer" class="form-field">
+            <option value="">Bitte wählen…</option>
+            <option>Kurzfristig (unter 1 Monat)</option>
+            <option>1–3 Monate</option>
+            <option>3–6 Monate</option>
+            <option>6–12 Monate</option>
+            <option>Langfristig / unbefristet</option>
+          </select>
+        </div>
+        <div class="req-nav">
+          <button type="button" class="btn btn--outline" style="flex:1;justify-content:center;" onclick="rPrevStep(2)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px;"><polyline points="15 18 9 12 15 6"/></svg>
+            Zurück
+          </button>
+          <button type="button" class="btn btn--primary" style="flex:1;justify-content:center;" onclick="rNextStep(2)">
+            Weiter
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:6px;"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Zusammenfassung & Absenden -->
+      <div class="req-panel" id="rp-3">
+        <div id="req-summary"></div>
+        <div class="form-group">
+          <label class="form-label">Besondere Anforderungen / Anmerkungen</label>
+          <textarea id="r-msg" class="form-field" placeholder="z.B. Nachtschichten, spezielle Qualifikationen, besondere Umstände…" style="min-height:90px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bevorzugter Kontaktweg</label>
+          <div class="contact-toggle">
+            <input type="radio" name="kontaktweg" id="kw-email" value="E-Mail" checked>
+            <label for="kw-email">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              E-Mail
+            </label>
+            <input type="radio" name="kontaktweg" id="kw-tel" value="Telefon">
+            <label for="kw-tel">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:5px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.36 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.27 1.2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.21a16 16 0 006.29 6.29l1.38-1.38a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.04z"/></svg>
+              Telefon
+            </label>
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="r-privacy">
+          <label for="r-privacy">Ich stimme der Verarbeitung meiner Daten gemäß <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> zu. *</label>
+        </div>
+        <div class="req-nav">
+          <button type="button" class="btn btn--outline" style="flex:1;justify-content:center;" onclick="rPrevStep(3)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px;"><polyline points="15 18 9 12 15 6"/></svg>
+            Zurück
+          </button>
+          <button type="submit" class="btn btn--primary" style="flex:2;justify-content:center;">
+            Anfrage absenden
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+    <div id="reqSuccess" style="display:none;padding:20px;background:var(--secondary-light);border-radius:var(--r);color:var(--secondary);font-weight:600;margin-top:16px;text-align:center;">
+      Anfrage erfolgreich gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.
+    </div>
+  </div>
+</div>
+
 <script src="js/main.js"></script>
+<script>
+// ── Stepper helpers ──
+function rFlashError(el) {
+  el.style.borderColor = '#ef4444';
+  el.style.background = '#fff1f2';
+  el.focus();
+  setTimeout(() => { el.style.borderColor = ''; el.style.background = ''; }, 2000);
+}
+
+function rValidate(step) {
+  if (step === 1) {
+    const v = document.getElementById('r-vorname');
+    const n = document.getElementById('r-nachname');
+    const e = document.getElementById('r-einrichtung');
+    const m = document.getElementById('r-email');
+    if (!v.value.trim()) { rFlashError(v); return false; }
+    if (!n.value.trim()) { rFlashError(n); return false; }
+    if (!e.value.trim()) { rFlashError(e); return false; }
+    if (!m.value.trim() || !m.value.includes('@')) { rFlashError(m); return false; }
+    return true;
+  }
+  if (step === 2) {
+    const s = document.getElementById('r-stelle');
+    const a = document.getElementById('r-anzahl');
+    const d = document.getElementById('r-datum');
+    const du = document.getElementById('r-dauer');
+    if (!s.value) { rFlashError(s); return false; }
+    if (!a.value) { rFlashError(a); return false; }
+    if (!d.value) { rFlashError(d); return false; }
+    if (!du.value) { rFlashError(du); return false; }
+    return true;
+  }
+  return true;
+}
+
+function rSetStep(to) {
+  document.querySelectorAll('.req-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('rp-' + to).classList.add('active');
+
+  for (let i = 1; i <= 3; i++) {
+    const ind = document.getElementById('ri-' + i);
+    const dot = ind.querySelector('.req-stepper__dot');
+    ind.classList.remove('active', 'done');
+    if (i < to) {
+      ind.classList.add('done');
+      dot.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+    } else {
+      dot.textContent = i;
+      if (i === to) ind.classList.add('active');
+    }
+  }
+  for (let i = 1; i <= 2; i++) {
+    document.getElementById('rl-' + i).classList.toggle('done', i < to);
+  }
+
+  if (to === 3) rBuildSummary();
+  document.querySelector('.req-modal').scrollTop = 0;
+}
+
+function rBuildSummary() {
+  const datum = document.getElementById('r-datum').value;
+  const datumFormatted = datum ? new Date(datum).toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' }) : '—';
+  document.getElementById('req-summary').innerHTML = `
+    <div class="summary-block">
+      <div class="summary-block__title">Ihre Kontaktdaten</div>
+      <div class="summary-row"><span>Name</span><span>${document.getElementById('r-vorname').value} ${document.getElementById('r-nachname').value}</span></div>
+      <div class="summary-row"><span>Einrichtung</span><span>${document.getElementById('r-einrichtung').value}</span></div>
+      <div class="summary-row"><span>E-Mail</span><span>${document.getElementById('r-email').value}</span></div>
+      ${document.getElementById('r-tel').value ? `<div class="summary-row"><span>Telefon</span><span>${document.getElementById('r-tel').value}</span></div>` : ''}
+    </div>
+    <div class="summary-block">
+      <div class="summary-block__title">Personalbedarf</div>
+      <div class="summary-row"><span>Art der Stelle</span><span>${document.getElementById('r-stelle').value}</span></div>
+      <div class="summary-row"><span>Anzahl</span><span>${document.getElementById('r-anzahl').value}</span></div>
+      <div class="summary-row"><span>Einsatz ab</span><span>${datumFormatted}</span></div>
+      <div class="summary-row"><span>Dauer</span><span>${document.getElementById('r-dauer').value}</span></div>
+    </div>
+  `;
+}
+
+function rNextStep(from) {
+  if (!rValidate(from)) return;
+  rSetStep(from + 1);
+}
+function rPrevStep(from) { rSetStep(from - 1); }
+
+function openReqModal() {
+  document.getElementById('reqModal').classList.add('open');
+  document.getElementById('reqSuccess').style.display = 'none';
+  document.getElementById('reqForm').reset();
+  rSetStep(1);
+  document.body.style.overflow = 'hidden';
+}
+function closeReqModal() {
+  document.getElementById('reqModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeReqOnOverlay(e) {
+  if (e.target === document.getElementById('reqModal')) closeReqModal();
+}
+
+document.getElementById('reqForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!document.getElementById('r-privacy').checked) {
+    document.getElementById('r-privacy').closest('.form-check').style.outline = '2px solid #ef4444';
+    setTimeout(() => { document.getElementById('r-privacy').closest('.form-check').style.outline = ''; }, 2500);
+    return;
+  }
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = 'Wird gesendet…';
+  setTimeout(() => {
+    this.reset();
+    btn.disabled = false; btn.textContent = 'Anfrage absenden';
+    document.getElementById('reqSuccess').style.display = 'block';
+    document.getElementById('req-summary').innerHTML = '';
+    rSetStep(1);
+  }, 1200);
+});
+</script>
 </body>
 </html>

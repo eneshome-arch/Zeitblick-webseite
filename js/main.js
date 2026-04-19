@@ -79,3 +79,39 @@ setTimeout(() => {
     el.classList.add('scroll-visible');
   });
 }, 800);
+
+// ── Count-Up Animation ──
+function countUp(el) {
+  const raw = el.textContent.trim();
+  // Extract leading number and suffix (e.g. "10+" → 10, "+")
+  const match = raw.match(/^(\d+)(.*)$/);
+  if (!match) return; // pure text like "Hannover" — skip
+  const target = parseInt(match[1], 10);
+  const suffix = match[2] || '';
+  // For large numbers start closer to target to keep animation snappy
+  const start = target > 100 ? target - 100 : 0;
+  const duration = 1600;
+  const startTime = performance.now();
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(start + (target - start) * ease);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+const countObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      countUp(entry.target);
+      countObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stats__number').forEach(el => countObserver.observe(el));
