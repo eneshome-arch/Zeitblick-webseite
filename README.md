@@ -12,7 +12,7 @@ Statische Unternehmenswebsite für **Zeitblick Personalservice**, eine Zeitarbei
 | **Branche** | Pflege-Zeitarbeit / Personalvermittlung |
 | **Standort** | Hannover, Deutschland |
 | **Typ** | Statische HTML/CSS/JS Website |
-| **Design** | Apple / OpenAI — clean, minimal, premium |
+| **Design** | Clean, modern, summery — Blau/Grün/Amber Farbpalette |
 
 ---
 
@@ -20,11 +20,11 @@ Statische Unternehmenswebsite für **Zeitblick Personalservice**, eine Zeitarbei
 
 | Datei | Seite | Beschreibung |
 |---|---|---|
-| `index.html` | Startseite | Hero, Stats, Vorteile, Split-CTA, Prozess, Testimonial |
+| `index.html` | Startseite | Hero mit Orbit-Animation, Stats, Vorteile, Split-CTA, Prozess, Testimonial |
 | `ueber-uns.html` | Über uns | Mission, Werte, Geschichte, Fachbereiche |
-| `unternehmen.html` | Für Unternehmen | Zielgruppen, Vorteile, 48h-Versprechen, Prozess |
-| `karriere.html` | Karriere & Stellen | 6 Stellenangebote, Filter, Bewerbungs-Modal |
-| `kontakt.html` | Kontakt | Formular, Google Maps, Öffnungszeiten |
+| `unternehmen.html` | Für Unternehmen | Zielgruppen, Vorteile, 3-Schritt-Anfrage-Modal |
+| `karriere.html` | Karriere & Stellen | 6 Stellenangebote, Filter, 3-Schritt-Bewerbungs-Modal |
+| `kontakt.html` | Kontakt | Formular, Kontaktdaten |
 | `impressum.html` | Impressum | Pflichtangaben nach § 5 TMG |
 | `datenschutz.html` | Datenschutz | DSGVO-konforme Datenschutzerklärung |
 
@@ -43,13 +43,13 @@ zeitblick-personal/
 ├── datenschutz.html
 │
 ├── assets/
-│   └── logo.png          # Original-Logo (übernommen von zeitblick-personal.de)
+│   └── logo.png
 │
 ├── css/
 │   └── style.css         # Haupt-Stylesheet (alle Seiten)
 │
 ├── js/
-│   └── main.js           # Navigation, Animationen, Formulare
+│   └── main.js           # Navigation, Animationen, Count-up, Formulare
 │
 └── README.md
 ```
@@ -73,15 +73,15 @@ Dann im Browser öffnen: **http://localhost:8080**
 
 | Variable | Hex | Verwendung |
 |---|---|---|
-| `--primary` | `#1a5096` | Buttons, Links, Akzente (Blau aus Logo) |
-| `--primary-dark` | `#0e3a6e` | Hover-Zustände |
-| `--primary-light` | `#e8f1fb` | Hintergründe, Badges |
-| `--secondary` | `#2b5219` | Grün-Elemente (Grün aus Logo) |
-| `--secondary-light` | `#eaf2e6` | Grüne Hintergründe |
+| `--primary` | `#0ea5e9` | Sky-Blau — Buttons, Links, Akzente |
+| `--primary-dark` | `#0284c7` | Hover-Zustände |
+| `--primary-light` | `#e0f2fe` | Hintergründe, Badges |
+| `--secondary` | `#10b981` | Emerald-Grün — Erfolgsstatus, Akzente |
+| `--secondary-light` | `#d1fae5` | Grüne Hintergründe |
+| `--accent` | `#f59e0b` | Amber — Highlights, Orbit-Bubbles |
 | `--bg-subtle` | `#f5f5f7` | Abschnittshintergründe |
-| `--bg-dark` | `#111111` | Footer, Dark Sections |
 | `--text` | `#1a1a1a` | Primärtext |
-| `--text-2` | `#6e6e73` | Sekundärtext, Fließtext |
+| `--text-2` | `#6e6e73` | Sekundärtext |
 
 ### Typografie
 
@@ -89,7 +89,6 @@ Dann im Browser öffnen: **http://localhost:8080**
 - **H1:** `clamp(2.4rem, 5vw, 4rem)` — Bold
 - **H2:** `clamp(1.8rem, 3.5vw, 2.8rem)` — Bold
 - **Body:** `17px / 1.65` — Regular
-- **Antialiasing:** `-webkit-font-smoothing: antialiased`
 
 ### Breakpoints
 
@@ -102,46 +101,115 @@ Dann im Browser öffnen: **http://localhost:8080**
 
 ---
 
-## Hero-Animationen
+## Animationen
 
-Die Hero-Sektion hat vier überlagerte CSS-Animationen:
+### Hero & Global
 
 | Animation | Dauer | Beschreibung |
 |---|---|---|
 | `heroGradient` | 14s Loop | Hintergrund-Gradient verschiebt sich sanft |
-| `orbFloat1` | 18s Loop | Blauer Orb driftet langsam |
-| `orbFloat2` | 22s Loop | Grüner Orb driftet in Gegenrichtung |
-| `badgePulse` | 3.5s Loop | Badge leuchtet subtil auf |
+| `orbFloat1/2` | 18–22s Loop | Hintergrund-Orbs driften |
+| `badgePulse` | 3.5s Loop | Hero-Badge leuchtet subtil auf |
 | `heroFadeUp` | 0.7s einmalig | Text-Elemente blenden gestaffelt ein |
-| `shimmer` | 4s Loop | "wirklich" — Blau→Grün Gradient-Shimmer |
+| `shimmer` | 4s Loop | Headline-Wort "wirklich" — Blau→Grün Gradient |
+| `btnShimmer` | 4s Loop | Alle Primary-Buttons — durchlaufender Lichteffekt |
+| `splitGloss` | 4s Loop | Split-Sektion Homepage — gemeinsamer Glanz-Sweep |
+
+### Orbit-Animation (alle Seiten)
+
+Jede Seite hat eine `.hero__visual` / `.page-hero__visual` mit zwei Umlaufbahnen:
+
+- **Innere Bahn** (`.ho-orbit--in`): 3 Bubbles, 11s im Uhrzeigersinn
+- **Äußere Bahn** (`.ho-orbit--out`): 3 Bubbles, 17s gegen den Uhrzeigersinn
+- Icons bleiben via Gegen-Rotation immer aufrecht
+- Farben: `.ho-sky`, `.ho-amber`, `.ho-green`, `.ho-pink`, `.ho-violet`, `.ho-rose`
+
+### Scroll-Animationen
+
+Cards, Job-Cards, Steps und Testimonials werden mit `IntersectionObserver` eingeblendet (`.scroll-hidden` → `.scroll-visible`). Fallback-Timer nach 800ms.
+
+### Count-up (alle Seiten)
+
+Zahlen in `.stats__number` zählen beim Einblenden hoch — Ease-out cubic, 1.6s Dauer.
+
+---
+
+## Navbar (Island-Style)
+
+Die Navigation ist als schwebendes Island-Element umgesetzt:
+
+```css
+.nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+}
+```
+
+- Wird beim Scrollen dunkler (`.scrolled`)
+- Mobile: Hamburger-Menü mit Slide-down Panel
+
+---
+
+## Modals
+
+### Bewerbungs-Modal (`karriere.html`)
+
+3-Schritt-Stepper für Stellenbewerbungen:
+
+| Schritt | Felder |
+|---|---|
+| 1 — Kontakt | Vorname, Nachname, E-Mail, Telefon |
+| 2 — Qualifikation | Abschluss, Anschreiben |
+| 3 — Unterlagen | Datei-Upload (Pflicht), Datenschutz |
+
+- Drag & Drop Datei-Upload, max. 10 MB pro Datei
+- Schrittweise Validierung vor Weiter-Navigation
+- Abgeschlossene Schritte zeigen grünes Häkchen
+
+### Anfrage-Modal (`unternehmen.html`)
+
+3-Schritt-Stepper für Personalanfragen von Einrichtungen:
+
+| Schritt | Felder |
+|---|---|
+| 1 — Kontakt | Vorname, Nachname, Einrichtung, E-Mail, Telefon |
+| 2 — Bedarf | Art der Stelle, Anzahl, Einsatz ab, Einsatzdauer |
+| 3 — Übersicht | Zusammenfassung, Anmerkungen, Kontaktweg-Wahl |
+
+---
+
+## Bilder
+
+Alle Bilder kommen von **Unsplash** (kostenlose kommerzielle Lizenz):
+
+| Seite | Platzierung | Beschreibung |
+|---|---|---|
+| `index.html` | Prozess-Sektion | Pflegekraft mit älterer Dame |
+| `index.html` | Photo-Banner | Pflegeteam — mit Zitat-Overlay |
+| `ueber-uns.html` | Mission-Sektion | Professionelle Pflegefachkraft |
+| `ueber-uns.html` | Photo-Banner | Pflegeteam — mit Zitat-Overlay |
+| `unternehmen.html` | Vorteile-Sektion | Pflegerin im Gespräch mit Patientin |
+| `karriere.html` | Photo-Banner | Pflegefachkraft — mit Zitat-Overlay |
 
 ---
 
 ## Kontaktformular
 
-Das Formular auf `kontakt.html` ist aktuell **frontend-only** (Demo-Modus mit simuliertem Versand). Für echten E-Mail-Versand muss ein Backend oder ein Dienst eingebunden werden:
+Das Formular auf `kontakt.html` ist aktuell **frontend-only** (Demo-Modus). Für echten E-Mail-Versand:
 
 **Empfohlene Optionen:**
 - [Formspree](https://formspree.io) — kostenfrei bis 50 Einsendungen/Monat
 - [Netlify Forms](https://www.netlify.com/products/forms/) — bei Hosting über Netlify
 - PHP-Skript auf eigenem Server
 
-**Formspree einbinden:**
 ```html
+<!-- Formspree einbinden: -->
 <form action="https://formspree.io/f/DEIN_FORMULAR_ID" method="POST">
 ```
-
----
-
-## Google Maps
-
-Die Karte auf der Kontaktseite nutzt einen einfachen Google Maps iFrame **ohne API-Key**:
-
-```html
-<iframe src="https://maps.google.com/maps?q=Vahrenwalder+Stra%C3%9Fe+255,+30179+Hannover&output=embed">
-```
-
-Für erweiterte Funktionen (Routing, Marker-Styling) kann die [Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started) mit einem API-Key genutzt werden.
 
 ---
 
@@ -161,7 +229,7 @@ USt:   95760381941
 
 ## Deployment
 
-Da es sich um eine rein statische Website handelt, kann sie auf jedem Webserver oder Static-Hosting-Dienst betrieben werden:
+Rein statische Website — läuft auf jedem Webserver oder Static-Hosting:
 
 ```bash
 # GitHub Pages
@@ -171,7 +239,7 @@ git commit -m "Initial commit"
 git branch -M main
 git remote add origin https://github.com/DEIN-USER/zeitblick-personal.git
 git push -u origin main
-# → In GitHub Settings: Pages → Branch: main → / (root)
+# → GitHub Settings → Pages → Branch: main → / (root)
 ```
 
 **Weitere Optionen:** Netlify, Vercel, Strato, IONOS, All-Inkl.
@@ -181,10 +249,10 @@ git push -u origin main
 ## TODO / Nächste Schritte
 
 - [ ] Kontaktformular-Backend einbinden (Formspree o.ä.)
-- [ ] Echte Fotos / Bilder einpflegen
+- [ ] Unsplash-Bilder durch lizenzfreie Eigenfotos ersetzen
 - [ ] SEO: `og:image`, `og:description` Meta-Tags ergänzen
 - [ ] Favicon einbinden
+- [ ] Cookie-Banner (DSGVO)
 - [ ] Google Analytics / Matomo optional einbinden
-- [ ] Domain verknüpfen
-- [ ] SSL-Zertifikat sicherstellen (HTTPS)
+- [ ] Domain verknüpfen & SSL sicherstellen
 - [ ] Stellenangebote dynamisch verwalten (z.B. via CMS)
