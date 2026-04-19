@@ -150,6 +150,7 @@ Die Navigation ist als schwebendes Island-Element umgesetzt:
 ```
 
 - Wird beim Scrollen dunkler (`.scrolled`)
+- CTA-Button (`nav__cta`) hat weiße Schrift (`color: #fff !important`)
 - Mobile: Hamburger-Menü mit Slide-down Panel
 
 ---
@@ -248,6 +249,7 @@ git push -u origin main
 
 ## TODO / Nächste Schritte
 
+- [x] Navbar CTA-Button Schriftfarbe auf Weiß gesetzt
 - [ ] Kontaktformular-Backend einbinden (Formspree o.ä.)
 - [ ] Unsplash-Bilder durch lizenzfreie Eigenfotos ersetzen
 - [ ] SEO: `og:image`, `og:description` Meta-Tags ergänzen
