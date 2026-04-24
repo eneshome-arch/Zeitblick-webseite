@@ -218,6 +218,7 @@ p { color: var(--text-2); line-height: 1.75; }
   border-radius: 10px;
   transition: background .2s, color .2s;
   line-height: 1;
+  white-space: nowrap;
 }
 .nav__link:hover { background: var(--bg-subtle); }
 .nav__link.active { color: var(--primary); font-weight: 600; }
