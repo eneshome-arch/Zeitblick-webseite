@@ -1046,7 +1046,7 @@ textarea.form-field { resize: vertical; min-height: 140px; }
   background-image: var(--hero-bg, none);
   background-size: cover;
   background-position: center;
-  opacity: 0.08;
+  opacity: 0.04;
   pointer-events: none;
 }
 .page-hero { position: relative; }
