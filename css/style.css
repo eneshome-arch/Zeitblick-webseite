@@ -140,9 +140,8 @@ p { color: var(--text-2); line-height: 1.75; }
   transform: translateX(-50%);
   z-index: 1000;
   height: 60px;
-  width: fit-content;
-  min-width: min(calc(100% - 40px), 760px);
-  max-width: calc(100% - 40px);
+  width: calc(100% - 40px);
+  max-width: 1400px;
   overflow: hidden;
   background: rgba(255,255,255,.88);
   backdrop-filter: saturate(180%) blur(20px);
