@@ -139,7 +139,7 @@ p { color: var(--text-2); line-height: 1.75; }
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  height: 60px;
+  height: 68px;
   width: calc(100% - 40px);
   max-width: 1400px;
   background: rgba(255,255,255,.88);
