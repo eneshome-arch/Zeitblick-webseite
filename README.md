@@ -20,10 +20,10 @@ Statische Unternehmenswebsite für **Zeitblick Personalservice**, eine Zeitarbei
 
 | Datei | Seite | Beschreibung |
 |---|---|---|
-| `index.html` | Startseite | Hero mit Orbit-Animation, Stats, Vorteile, Split-CTA, Prozess, Testimonial |
+| `index.html` | Startseite | Hero mit Orbit-Animation, Stats, Vorteile, Split-CTA, Standort/Einsatzgebiet, Prozess, Testimonial |
 | `ueber-uns.html` | Über uns | Mission, Werte, Geschichte, Fachbereiche |
 | `unternehmen.html` | Für Unternehmen | Zielgruppen, Vorteile, 3-Schritt-Anfrage-Modal |
-| `karriere.html` | Karriere & Stellen | 6 Stellenangebote, Filter, 3-Schritt-Bewerbungs-Modal |
+| `karriere.html` | Karriere & Stellen | 11 Stellenangebote, 5 Filterkategorien, 3-Schritt-Bewerbungs-Modal |
 | `kontakt.html` | Kontakt | Formular, Kontaktdaten |
 | `impressum.html` | Impressum | Pflichtangaben nach § 5 TMG |
 | `datenschutz.html` | Datenschutz | DSGVO-konforme Datenschutzerklärung |
@@ -250,10 +250,12 @@ git push -u origin main
 ## TODO / Nächste Schritte
 
 - [x] Navbar CTA-Button Schriftfarbe auf Weiß gesetzt
+- [x] Favicon eingebunden (`assets/favicon.svg`)
+- [x] SEO: `og:image`, `og:description` Meta-Tags auf allen Seiten
+- [x] Standort-Sektion auf Startseite (Adresse, Telefon, Einsatzgebiet)
+- [x] Karriere-Seite: 11 Stellenangebote in 5 Kategorien (Fachkräfte, Assistenz, Hilfskräfte, Medizin, Hauswirtschaft)
 - [ ] Kontaktformular-Backend einbinden (Formspree o.ä.)
 - [ ] Unsplash-Bilder durch lizenzfreie Eigenfotos ersetzen
-- [ ] SEO: `og:image`, `og:description` Meta-Tags ergänzen
-- [ ] Favicon einbinden
 - [ ] Cookie-Banner (DSGVO)
 - [ ] Google Analytics / Matomo optional einbinden
 - [ ] Domain verknüpfen & SSL sicherstellen

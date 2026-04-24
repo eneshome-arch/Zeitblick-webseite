@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://www.zeitblick-personal.de/karriere.html">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=6">
   <style>
     .jobs-filter {
       display: flex;
@@ -375,50 +375,126 @@
 
     <div class="jobs-filter">
       <button class="filter-btn active" onclick="filterJobs('alle', this)">Alle</button>
-      <button class="filter-btn" onclick="filterJobs('fachkraft', this)">Fachkraft</button>
-      <button class="filter-btn" onclick="filterJobs('hilfskraft', this)">Hilfskraft</button>
-      <button class="filter-btn" onclick="filterJobs('leitung', this)">Leitung</button>
+      <button class="filter-btn" onclick="filterJobs('fachkraft', this)">Examinierte Fachkräfte</button>
+      <button class="filter-btn" onclick="filterJobs('assistenz', this)">Pflegeassistenz</button>
+      <button class="filter-btn" onclick="filterJobs('hilfskraft', this)">Hilfskräfte</button>
+      <button class="filter-btn" onclick="filterJobs('medizin', this)">Medizinisches Personal</button>
+      <button class="filter-btn" onclick="filterJobs('hauswirtschaft', this)">Hauswirtschaft</button>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:14px;" id="jobList">
 
-      <div class="job-card" data-category="fachkraft" onclick="openApply('Altenpfleger/in (m/w/d)')">
+      <!-- Examinierte Pflegefachkräfte -->
+      <div class="job-card" data-category="fachkraft" onclick="openApply('Pflegefachmann / Pflegefachfrau (m/w/d)')">
         <div class="job-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
         <div class="job-card__body">
-          <div class="job-card__title">Altenpfleger/in (m/w/d)</div>
+          <div class="job-card__title">Pflegefachmann / Pflegefachfrau (m/w/d)</div>
           <div class="job-card__meta">
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
             <span class="job-card__badge">Sofort verfügbar</span>
           </div>
         </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
-      <div class="job-card" data-category="fachkraft" onclick="openApply('Pflegefachkraft (m/w/d)')">
+      <div class="job-card" data-category="fachkraft" onclick="openApply('Gesundheits- und Krankenpfleger/in (m/w/d)')">
         <div class="job-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         </div>
         <div class="job-card__body">
-          <div class="job-card__title">Pflegefachkraft (m/w/d)</div>
+          <div class="job-card__title">Gesundheits- und Krankenpfleger/in (m/w/d)</div>
           <div class="job-card__meta">
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
-            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
             <span class="job-card__badge">Sofort verfügbar</span>
           </div>
         </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
-      <div class="job-card" data-category="hilfskraft" onclick="openApply('Pflegehelfer/in (m/w/d)')">
+      <div class="job-card" data-category="fachkraft" onclick="openApply('Altenpfleger/in (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Altenpfleger/in (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Mehrere Stellen</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card" data-category="fachkraft" onclick="openApply('Krankenschwester / Krankenpfleger (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Krankenschwester / Krankenpfleger (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Sofort verfügbar</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <!-- Pflegeassistenz -->
+      <div class="job-card" data-category="assistenz" onclick="openApply('Pflegeassistent/in (m/w/d)')">
         <div class="job-card__icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Pflegeassistent/in (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Mehrere Stellen</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card" data-category="assistenz" onclick="openApply('Altenpflegehelfer/in (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Altenpflegehelfer/in (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Sofort verfügbar</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card" data-category="assistenz" onclick="openApply('Gesundheits- und Krankenpflegehelfer/in (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Gesundheits- und Krankenpflegehelfer/in (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Sofort verfügbar</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <!-- Pflegehilfskräfte -->
+      <div class="job-card" data-category="hilfskraft" onclick="openApply('Pflegehelfer/in (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         </div>
         <div class="job-card__body">
           <div class="job-card__title">Pflegehelfer/in (m/w/d)</div>
@@ -428,60 +504,84 @@
             <span class="job-card__badge">Mehrere Stellen</span>
           </div>
         </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
-      <div class="job-card" data-category="leitung" onclick="openApply('Wohnbereichsleitung (m/w/d)')">
+      <!-- Medizinisches Fachpersonal -->
+      <div class="job-card" data-category="medizin" onclick="openApply('Medizinische Fachangestellte (m/w/d)')">
         <div class="job-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
         </div>
         <div class="job-card__body">
-          <div class="job-card__title">Wohnbereichsleitung (m/w/d)</div>
-          <div class="job-card__meta">
-            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
-            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit</span>
-            <span class="job-card__badge">Führungsposition</span>
-          </div>
-        </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
-      </div>
-
-      <div class="job-card" data-category="fachkraft" onclick="openApply('Gerontopsychiatrische Fachkraft (m/w/d)')">
-        <div class="job-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        </div>
-        <div class="job-card__body">
-          <div class="job-card__title">Gerontopsychiatrische Fachkraft (m/w/d)</div>
+          <div class="job-card__title">Medizinische Fachangestellte / MFA (m/w/d)</div>
           <div class="job-card__meta">
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
-            <span class="job-card__badge">Spezialist</span>
+            <span class="job-card__badge">Sofort verfügbar</span>
           </div>
         </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
-      <div class="job-card" data-category="hilfskraft" onclick="openApply('Betreuungsassistenz (m/w/d) nach §43b SGB XI')">
+      <div class="job-card" data-category="medizin" onclick="openApply('Arzthelfer/in (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Arzthelfer/in (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
+            <span class="job-card__badge">Sofort verfügbar</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <!-- Hauswirtschaft und Service -->
+      <div class="job-card" data-category="hauswirtschaft" onclick="openApply('Hauswirtschaftskraft (m/w/d)')">
         <div class="job-card__icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         </div>
         <div class="job-card__body">
-          <div class="job-card__title">Betreuungsassistenz (m/w/d) §43b SGB XI</div>
+          <div class="job-card__title">Hauswirtschaftskraft (m/w/d)</div>
           <div class="job-card__meta">
             <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
-            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Teilzeit</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Vollzeit / Teilzeit</span>
             <span class="job-card__badge">Mehrere Stellen</span>
           </div>
         </div>
-        <div class="job-card__arrow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card" data-category="hauswirtschaft" onclick="openApply('Reinigungskraft (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Reinigungskraft (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Teilzeit / Minijob</span>
+            <span class="job-card__badge">Mehrere Stellen</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+
+      <div class="job-card" data-category="hauswirtschaft" onclick="openApply('Küchenhilfe (m/w/d)')">
+        <div class="job-card__icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="job-card__body">
+          <div class="job-card__title">Küchenhilfe (m/w/d)</div>
+          <div class="job-card__meta">
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Hannover & Region</span>
+            <span class="job-card__tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Teilzeit / Minijob</span>
+            <span class="job-card__badge">Mehrere Stellen</span>
+          </div>
+        </div>
+        <div class="job-card__arrow"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
       </div>
 
     </div>
