@@ -142,7 +142,6 @@ p { color: var(--text-2); line-height: 1.75; }
   height: 60px;
   width: calc(100% - 40px);
   max-width: 1400px;
-  overflow: hidden;
   background: rgba(255,255,255,.88);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
