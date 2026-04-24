@@ -163,7 +163,7 @@ p { color: var(--text-2); line-height: 1.75; }
   gap: 8px;
   padding: 0 20px;
 }
-.nav__logo img { height: 44px; width: auto; }
+.nav__logo img { height: 54px; width: auto; }
 
 /* Nav Contact Links */
 .nav__contact {
