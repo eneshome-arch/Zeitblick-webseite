@@ -164,7 +164,8 @@ p { color: var(--text-2); line-height: 1.75; }
   gap: 8px;
   padding: 0 20px;
 }
-.nav__logo img { height: 48px; width: auto; }
+.nav__logo { flex-shrink: 0; display: flex; align-items: center; }
+.nav__logo img { height: 48px; width: auto; object-fit: contain; display: block; }
 
 /* Nav Contact Links */
 .nav__contact {
