@@ -143,6 +143,7 @@ p { color: var(--text-2); line-height: 1.75; }
   width: fit-content;
   min-width: min(calc(100% - 40px), 760px);
   max-width: calc(100% - 40px);
+  overflow: hidden;
   background: rgba(255,255,255,.88);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -195,6 +196,9 @@ p { color: var(--text-2); line-height: 1.75; }
 }
 @media (max-width: 1200px) {
   .nav__contact { display: none; }
+}
+@media (max-width: 960px) {
+  .nav__cta { display: none; }
 }
 .nav__links {
   display: flex;
