@@ -1037,6 +1037,20 @@ textarea.form-field { resize: vertical; min-height: 140px; }
 }
 .hero--light .container { width: 100%; }
 
+/* --- Hero & Page-Hero Hintergrundbild --- */
+.hero::before,
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--hero-bg, none);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.13;
+  pointer-events: none;
+}
+.page-hero { position: relative; }
+
 /* Gradient shift */
 @keyframes heroGradient {
   0%   { background-position: 0% 50%; }
