@@ -256,7 +256,7 @@ git push -u origin main
 - [x] Karriere-Seite: 11 Stellenangebote in 5 Kategorien (Fachkräfte, Assistenz, Hilfskräfte, Medizin, Hauswirtschaft)
 - [ ] Kontaktformular-Backend einbinden (Formspree o.ä.)
 - [ ] Unsplash-Bilder durch lizenzfreie Eigenfotos ersetzen
-- [ ] Cookie-Banner (DSGVO)
+- [x] Cookie-Banner (DSGVO) — eingebaut in main.js + style.css
 - [ ] Google Analytics / Matomo optional einbinden
 - [ ] Domain verknüpfen & SSL sicherstellen
 - [ ] Stellenangebote dynamisch verwalten (z.B. via CMS)
