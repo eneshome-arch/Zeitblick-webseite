@@ -14,7 +14,6 @@ if (toggle && mobileNav) {
     const open = mobileNav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
   });
-  // Close on link click
   mobileNav.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => mobileNav.classList.remove('open'));
   });
@@ -35,28 +34,100 @@ document.querySelectorAll('.nav__mobile a').forEach(link => {
   }
 });
 
-// Contact form
+// ── Google Maps Lazy Load ──
+function loadMap() {
+  const iframe = document.getElementById('googleMap');
+  const consent = document.getElementById('mapConsent');
+  if (iframe && iframe.dataset.src) {
+    iframe.src = iframe.dataset.src;
+    iframe.style.display = 'block';
+  }
+  if (consent) consent.style.display = 'none';
+  localStorage.setItem('cookie_consent', 'all');
+}
+
+// Auto-load map if consent was previously given
+if (localStorage.getItem('cookie_consent') === 'all') {
+  document.addEventListener('DOMContentLoaded', loadMap);
+}
+
+// ── Cookie Banner ──
+(function () {
+  if (localStorage.getItem('cookie_consent')) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'cookieBanner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Cookie-Einstellungen');
+  banner.innerHTML = `
+    <div class="cookie-banner__inner">
+      <div class="cookie-banner__text">
+        <strong>Cookies & Datenschutz</strong>
+        <p>Wir nutzen externe Dienste wie Google Maps, die beim Laden Daten an Dritte übertragen. Bitte wählen Sie Ihre Einstellungen.</p>
+        <a href="datenschutz.html">Datenschutzerklärung</a>
+      </div>
+      <div class="cookie-banner__actions">
+        <button id="cookieNecessary" class="btn btn--outline">Nur notwendige</button>
+        <button id="cookieAcceptAll" class="btn btn--primary">Alle akzeptieren</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  document.getElementById('cookieAcceptAll').addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'all');
+    banner.remove();
+    loadMap();
+  });
+
+  document.getElementById('cookieNecessary').addEventListener('click', () => {
+    localStorage.setItem('cookie_consent', 'necessary');
+    banner.remove();
+  });
+})();
+
+// ── Kontaktformular — Formspree ──
+// WICHTIG: Ersetze YOUR_FORMSPREE_ID mit deiner echten ID von formspree.io
+const FORMSPREE_ID = 'YOUR_FORMSPREE_ID';
+
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
     const success = document.getElementById('formSuccess');
+    const error = document.getElementById('formError');
+
     btn.disabled = true;
     btn.textContent = 'Wird gesendet…';
-    setTimeout(() => {
-      form.reset();
-      btn.disabled = false;
-      btn.textContent = 'Nachricht senden';
-      if (success) {
-        success.style.display = 'block';
-        setTimeout(() => success.style.display = 'none', 6000);
+    if (error) error.style.display = 'none';
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        form.reset();
+        if (success) {
+          success.style.display = 'block';
+          setTimeout(() => (success.style.display = 'none'), 7000);
+        }
+      } else {
+        if (error) error.style.display = 'block';
       }
-    }, 1200);
+    } catch (_) {
+      if (error) error.style.display = 'block';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Nachricht senden';
   });
 }
 
-// Scroll animations — CSS class approach, with fallback timer
+// ── Scroll Animations ──
 const animEls = document.querySelectorAll('.card, .job-card, .step, .testimonial');
 animEls.forEach(el => el.classList.add('scroll-hidden'));
 
@@ -72,7 +143,6 @@ const observer = new IntersectionObserver(entries => {
 
 animEls.forEach(el => observer.observe(el));
 
-// Fallback: reveal everything after 800ms regardless
 setTimeout(() => {
   animEls.forEach(el => {
     el.classList.remove('scroll-hidden');
@@ -83,12 +153,10 @@ setTimeout(() => {
 // ── Count-Up Animation ──
 function countUp(el) {
   const raw = el.textContent.trim();
-  // Extract leading number and suffix (e.g. "10+" → 10, "+")
   const match = raw.match(/^(\d+)(.*)$/);
-  if (!match) return; // pure text like "Hannover" — skip
+  if (!match) return;
   const target = parseInt(match[1], 10);
   const suffix = match[2] || '';
-  // For large numbers start closer to target to keep animation snappy
   const start = target > 100 ? target - 100 : 0;
   const duration = 1600;
   const startTime = performance.now();
@@ -96,7 +164,6 @@ function countUp(el) {
   function frame(now) {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
     const ease = 1 - Math.pow(1 - progress, 3);
     const current = Math.round(start + (target - start) * ease);
     el.textContent = current + suffix;

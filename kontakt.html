@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kontakt — Zeitblick Personalservice</title>
   <meta name="description" content="Kontaktieren Sie Zeitblick Personalservice in Hannover. Telefon, E-Mail oder Kontaktformular.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kontakt — Zeitblick Personalservice">
+  <meta property="og:description" content="Kontaktieren Sie Zeitblick Personalservice in Hannover. Telefon, E-Mail oder Kontaktformular.">
+  <meta property="og:image" content="https://www.zeitblick-personal.de/assets/logo.png">
+  <meta property="og:url" content="https://www.zeitblick-personal.de/kontakt.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -117,14 +124,20 @@
 
         <!-- Google Maps -->
         <h4 style="margin-bottom:16px;">Unser Standort</h4>
-        <div class="map-wrapper">
+        <div class="map-wrapper" id="mapWrapper">
+          <div id="mapConsent" class="map-consent">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <p>Diese Karte wird von Google Maps bereitgestellt. Beim Laden werden Daten an Google übertragen.</p>
+            <button onclick="loadMap()" class="btn btn--primary" style="margin-top:12px;">Karte laden</button>
+            <a href="datenschutz.html" style="display:block;margin-top:10px;font-size:.8rem;color:var(--text-2);">Datenschutzerklärung</a>
+          </div>
           <iframe
-            src="https://maps.google.com/maps?q=Vahrenwalder+Stra%C3%9Fe+255,+30179+Hannover&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            id="googleMap"
+            data-src="https://maps.google.com/maps?q=Vahrenwalder+Stra%C3%9Fe+255,+30179+Hannover&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%"
             height="380"
-            style="border:0;"
+            style="border:0;display:none;"
             allowfullscreen=""
-            loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             title="Zeitblick Personalservice Standort Hannover">
           </iframe>
@@ -137,6 +150,9 @@
         <p style="margin-bottom:32px;font-size:.95rem;">Füllen Sie das Formular aus – wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
 
         <form id="contactForm">
+          <input type="hidden" name="_subject" value="Neue Kontaktanfrage — Zeitblick Personalservice">
+          <input type="hidden" name="_language" value="de">
+
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
             <label style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;border:1.5px solid var(--border);cursor:pointer;font-size:.88rem;font-weight:600;transition:all .2s;" id="typePersonal">
               <input type="radio" name="type" value="Pflegekraft" checked style="accent-color:var(--primary);">
@@ -151,36 +167,36 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Vorname *</label>
-              <input type="text" class="form-field" required placeholder="Max">
+              <input type="text" name="vorname" class="form-field" required placeholder="Max">
             </div>
             <div class="form-group">
               <label class="form-label">Nachname *</label>
-              <input type="text" class="form-field" required placeholder="Mustermann">
+              <input type="text" name="nachname" class="form-field" required placeholder="Mustermann">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label">E-Mail-Adresse *</label>
-            <input type="email" class="form-field" required placeholder="max@beispiel.de">
+            <input type="email" name="email" class="form-field" required placeholder="max@beispiel.de">
           </div>
 
           <div class="form-group">
             <label class="form-label">Telefonnummer</label>
-            <input type="tel" class="form-field" placeholder="+49 ...">
+            <input type="tel" name="telefon" class="form-field" placeholder="+49 ...">
           </div>
 
           <div class="form-group">
             <label class="form-label">Betreff</label>
-            <input type="text" class="form-field" placeholder="Womit können wir Ihnen helfen?">
+            <input type="text" name="betreff" class="form-field" placeholder="Womit können wir Ihnen helfen?">
           </div>
 
           <div class="form-group">
             <label class="form-label">Ihre Nachricht *</label>
-            <textarea class="form-field" required placeholder="Schildern Sie kurz Ihr Anliegen – wir melden uns so schnell wie möglich."></textarea>
+            <textarea name="nachricht" class="form-field" required placeholder="Schildern Sie kurz Ihr Anliegen – wir melden uns so schnell wie möglich."></textarea>
           </div>
 
           <div class="form-check">
-            <input type="checkbox" id="privacy" required>
+            <input type="checkbox" id="privacy" name="datenschutz" value="Zugestimmt" required>
             <label for="privacy">Ich stimme der Verarbeitung meiner personenbezogenen Daten gemäß der <a href="datenschutz.html">Datenschutzerklärung</a> zu. *</label>
           </div>
 
@@ -190,6 +206,9 @@
 
           <div class="form-success" id="formSuccess">
             Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns bald bei Ihnen.
+          </div>
+          <div class="form-error" id="formError">
+            Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an <a href="mailto:info@zeitblick-personal.de">info@zeitblick-personal.de</a>.
           </div>
         </form>
       </div>

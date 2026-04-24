@@ -1202,10 +1202,95 @@ textarea.form-field { resize: vertical; min-height: 140px; }
   align-items: center;
   gap: 64px;
 }
-.page-hero__visual {
-  position: relative;
-  width: 420px;
-  height: 420px;
-  margin: 0 auto;
-  flex-shrink: 0;
+
+/* ── Cookie Banner ── */
+#cookieBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  padding: 20px 24px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.18);
 }
+.cookie-banner__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.cookie-banner__text strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+.cookie-banner__text p {
+  font-size: .88rem;
+  color: #94a3b8;
+  margin: 0 0 6px;
+}
+.cookie-banner__text a {
+  font-size: .82rem;
+  color: var(--primary);
+  text-decoration: underline;
+}
+.cookie-banner__actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.cookie-banner__actions .btn--outline {
+  border-color: #475569;
+  color: #cbd5e1;
+}
+.cookie-banner__actions .btn--outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── Google Maps Consent Placeholder ── */
+.map-consent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  height: 380px;
+  background: var(--bg-subtle);
+  border-radius: var(--r-lg);
+  border: 1.5px dashed var(--border);
+  padding: 32px;
+  color: var(--text-2);
+}
+.map-consent svg {
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+.map-consent p {
+  font-size: .9rem;
+  max-width: 320px;
+}
+
+/* ── Form Error ── */
+.form-error {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: #fff1f2;
+  border: 1px solid #fca5a5;
+  border-radius: var(--r);
+  color: #dc2626;
+  font-size: .9rem;
+}
+.form-error a {
+  color: #dc2626;
+  text-decoration: underline;
+}
+
