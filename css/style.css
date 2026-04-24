@@ -139,9 +139,9 @@ p { color: var(--text-2); line-height: 1.75; }
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  height: 56px;
-  width: calc(100% - 48px);
-  max-width: 1160px;
+  height: 60px;
+  width: calc(100% - 40px);
+  max-width: 1360px;
   background: rgba(255,255,255,.88);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
