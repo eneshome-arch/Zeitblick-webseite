@@ -185,16 +185,16 @@ Die Navigation ist als schwebendes Island-Element umgesetzt:
 
 ## Bilder
 
-Alle Bilder kommen von **Unsplash** (kostenlose kommerzielle Lizenz):
+Bilder aus Unsplash (kostenlose kommerzielle Lizenz) sowie eigene/KI-generierte Assets:
 
-| Seite | Platzierung | Beschreibung |
-|---|---|---|
-| `index.html` | Prozess-Sektion | Pflegekraft mit älterer Dame |
-| `index.html` | Photo-Banner | Pflegeteam — mit Zitat-Overlay |
-| `ueber-uns.html` | Mission-Sektion | Professionelle Pflegefachkraft |
-| `ueber-uns.html` | Photo-Banner | Pflegeteam — mit Zitat-Overlay |
-| `unternehmen.html` | Vorteile-Sektion | Pflegerin im Gespräch mit Patientin |
-| `karriere.html` | Photo-Banner | Pflegefachkraft — mit Zitat-Overlay |
+| Seite | Platzierung | Quelle | Beschreibung |
+|---|---|---|---|
+| `index.html` | Prozess-Sektion | Unsplash | Pflegekraft mit älterer Dame |
+| `index.html` | Photo-Banner | Unsplash | Pflegeteam — mit Zitat-Overlay |
+| `ueber-uns.html` | Mission-Sektion | `assets/mission.jpg` | Pflegefachkraft mit Stethoskop (eigenes Asset) |
+| `ueber-uns.html` | Photo-Banner | Unsplash | Pflegeteam — mit Zitat-Overlay |
+| `unternehmen.html` | Vorteile-Sektion | Unsplash | Pflegerin im Gespräch mit Patientin |
+| `karriere.html` | Photo-Banner | Unsplash | Pflegefachkraft — mit Zitat-Overlay |
 
 ---
 
