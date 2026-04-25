@@ -795,6 +795,16 @@ textarea.form-field { resize: vertical; min-height: 140px; }
 }
 .footer__copy { font-size: .85rem; }
 .footer__legal { display: flex; gap: 20px; }
+.footer__credit { font-size: .8rem; color: rgba(255,255,255,.35); }
+.footer__credit a {
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  padding-bottom: 1px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.footer__credit a:hover { color: #fff; border-color: #fff; }
 .footer__legal a {
   font-size: .85rem;
   color: rgba(255,255,255,.4);

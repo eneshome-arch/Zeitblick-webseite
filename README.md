@@ -247,6 +247,12 @@ git push -u origin main
 
 ---
 
+## Credits
+
+Design und technische Umsetzung durch **[VYOMedia](https://vyomedia.de)**.
+
+---
+
 ## TODO / Nächste Schritte
 
 - [x] Navbar CTA-Button Schriftfarbe auf Weiß gesetzt
@@ -254,6 +260,7 @@ git push -u origin main
 - [x] SEO: `og:image`, `og:description` Meta-Tags auf allen Seiten
 - [x] Standort-Sektion auf Startseite (Adresse, Telefon, Einsatzgebiet)
 - [x] Karriere-Seite: 11 Stellenangebote in 5 Kategorien (Fachkräfte, Assistenz, Hilfskräfte, Medizin, Hauswirtschaft)
+- [x] VYOMedia-Signatur im Footer (alle Seiten) + Impressum verlinkt
 - [ ] Kontaktformular-Backend einbinden (Formspree o.ä.)
 - [ ] Unsplash-Bilder durch lizenzfreie Eigenfotos ersetzen
 - [x] Cookie-Banner (DSGVO) — eingebaut in main.js + style.css
